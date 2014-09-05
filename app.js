@@ -3,8 +3,11 @@ var server = express();
 var MongoClient = require('mongodb').MongoClient
 
 function isTimeInRangeWrap(hour, min, start_hour, start_min, end_hour, end_min) {
-	if (isTimeAfter(start_hour, start_min, end_hour, end_min))	return !isTimeInRange(hour, min, start_hour, start_min, end_hour, end_min);
-	else isTimeInRange(hour, min, start_hour, start_min, end_hour, end_min);
+	if (isTimeAfter(start_hour, start_min, end_hour, end_min))	{
+		console.log("Inverted Range");
+		return !isTimeInRange(hour, min, end_hour, end_min, start_hour, start_min);
+	}
+	else return isTimeInRange(hour, min, start_hour, start_min, end_hour, end_min);
 }
 
 function isTimeInRange(hour, min, start_hour, start_min, end_hour, end_min) {
@@ -31,7 +34,9 @@ function isOpen(roomNumber, callback) {
 				var date = new Date();
 				var hour = date.getHours();
 				var mins = date.getMinutes();
+				console.log("Time: " + hour + ":" + mins);
 				var block = results[i];
+				console.log("Block: " + block.start_hour + ":" + block.start_min + " - " + block.end_hour + ":" + block.end_min);
 				if (isTimeInRangeWrap(hour, mins, block.start_hour, block.start_min, block.end_hour, block.end_min)) {
 					callback(false);
 					db.close();
