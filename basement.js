@@ -6,8 +6,8 @@ function fillB449(color) {
 	var image = document.getElementById("img");
 	context.fillStyle = color;
 	context.beginPath();
-	var x = 115;
-	var y = 265;
+	var x = 113;
+	var y = 285;
 	var h = 40;
 	var w = 50;
 	context.moveTo(x, y);
