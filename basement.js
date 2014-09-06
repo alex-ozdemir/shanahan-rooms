@@ -1,14 +1,15 @@
+function thisContext() {
+	return document.getElementById("basement").getContext("2d");
+}
+
+
 function fillB449(color) {
-	var canvas = document.getElementById("basement");
-	console.log("height: " + canvas.offsetHeight);
-	console.log("width: " + canvas.offsetWidth);
-	var context = canvas.getContext("2d");
-	var image = document.getElementById("img");
+	context = thisContext()
 	context.fillStyle = color;
 	context.beginPath();
 	var x = 113;
-	var y = 285;
-	var h = 40;
+	var y = 291;
+	var h = 46;
 	var w = 50;
 	context.moveTo(x, y);
 	context.lineTo(x + w, y);
