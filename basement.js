@@ -4,12 +4,16 @@ function fillB449(color) {
 	console.log("width: " + canvas.offsetWidth);
 	var context = canvas.getContext("2d");
 	var image = document.getElementById("img");
-	context.fillStyle = '#faa';
+	context.fillStyle = color;
 	context.beginPath();
-	context.moveTo(205, 548);
-	context.lineTo(293, 548);
-	context.lineTo(293, 634);
-	context.lineTo(205, 634);
+	var x = 115;
+	var y = 265;
+	var h = 40;
+	var w = 50;
+	context.moveTo(x, y);
+	context.lineTo(x + w, y);
+	context.lineTo(x + w, y + h);
+	context.lineTo(x, y + h);
 	context.closePath();
 	context.fill();
 }
