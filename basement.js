@@ -54,13 +54,13 @@ function fill1430(color) {
 	context.fill();
 }
 
-function fillB450(color) {
+function fillB454(color) {
 	context = thisContext(color)
 	context.beginPath();
 	var x = 89;
 	var y = 354;
 	var w = 45;
-	var h = 57;
+	var h = 56;
     context.rect(x, y, w, h);
 	context.fill();
 }
@@ -73,5 +73,47 @@ function fillAG(color) {
 	var w = 87;
 	var h = 35;
     context.rect(x, y, w, h);
+	context.fill();
+}
+
+function fillB450(color) {
+	context = thisContext(color)
+	context.beginPath();
+	var x = 134;
+	var y = 354;
+	var w = 79;
+	var h = 56;
+    context.rect(x, y, w, h);
+	context.fill();
+}
+
+function fillB442(color) {
+	context = thisContext(color)
+	context.beginPath();
+	var x = 213;
+	var y = 354;
+	var w = 77;
+	var h = 56;
+    context.rect(x, y, w, h);
+	context.fill();
+}
+
+function fillB460(color) {
+	context = thisContext(color)
+	var x = 5;
+	var y = 308;
+	var ph = 14;
+	var pw = 13;
+	var ph2 = 3;
+	var w = 84;
+	var h = 102;
+	context.beginPath();
+    context.moveTo(x, y);
+    context.lineTo(x + pw, y);
+    context.lineTo(x + pw, y - ph);
+    context.lineTo(x + w, y - ph2);
+    context.lineTo(x + w, y + h);
+    context.lineTo(x, y + h);
+    context.closePath()
 	context.fill();
 }
