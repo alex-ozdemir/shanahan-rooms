@@ -140,6 +140,10 @@ function fillB480(color) {
     context.lineTo(x + w2, y + h2);
     context.lineTo(x + w3, y + h);
     context.lineTo(x, y + h);
+    context.closePath()
+	context.fill();
+}
+
 function fillB470(color) {
 	context = thisContext(color)
 	var x = 35;
