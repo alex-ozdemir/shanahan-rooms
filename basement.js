@@ -64,3 +64,14 @@ function fillB450(color) {
     context.rect(x, y, w, h);
 	context.fill();
 }
+
+function fillAG(color) {
+	context = thisContext(color)
+	context.beginPath();
+	var x = 92;
+	var y = 125;
+	var w = 87;
+	var h = 35;
+    context.rect(x, y, w, h);
+	context.fill();
+}
