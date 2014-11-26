@@ -26,21 +26,39 @@ function fill1480(color) {
 
 function fill1470(color) {
 	context = thisContext(color)
-	var x = 27;
-	var y = 126;
-	var w = 63;
-	var w2 = 54;
-	var h2 = 69;
-	var w3 = -23;
+	var x = 26;
+	var y = 184;
+	var w1 = 78;
+	var h1 = 9;
+	var w2 = 70;
+	var h2 = 70;
+	var w3 = 0;
 	var h3 = 57;
-	var h4 = 53;
 	context.beginPath();
     context.moveTo(x, y);
-    context.lineTo(x + w, y);
+    context.lineTo(x + w1, y + h1);
     context.lineTo(x + w2, y + h2);
     context.lineTo(x + w3, y + h3);
-    context.lineTo(x + w3, y + h4);
     context.closePath();
+	context.fill();
+}
+
+function fillLR(color) {
+	context = thisContext(color)
+	var x = 26;
+	var y = 240;
+	var w1 = 71; 
+	var h1 = 13;
+	var w2 = 64;
+	var h2 = 67;
+	var w3 = 0;
+	var h3 = 57; 
+	context.beginPath();
+	context.moveTo(x, y);
+	context.lineTo(x + w1, y + h1);
+	context.lineTo(x + w2, y + h2);
+	context.lineTo(x + w3, y + h3);
+	context.closePath();
 	context.fill();
 }
 
