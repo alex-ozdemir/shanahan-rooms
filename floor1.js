@@ -62,6 +62,27 @@ function fillLR(color) {
 	context.fill();
 }
 
+function fillCafe(color) {
+	context = thisContext(color)
+	var x = 26;
+	var y = 295;
+	var w1 = 64; 
+	var h1 = 11;
+	var w2 = 55;
+	var h2 = 84;
+	var w3 = 1;
+	var h3 = 78; 
+	context.beginPath();
+	context.moveTo(x, y);
+	context.lineTo(x + w1, y + h1);
+	context.lineTo(x + w2, y + h2);
+	context.lineTo(x + w3, y + h3);
+	context.closePath();
+	context.fill();
+}
+
+
+
 function fill1430(color) {
 	context = thisContext(color)
 	var x = 214;
