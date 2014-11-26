@@ -1,5 +1,5 @@
 function thisContext(color) {
-	context = document.getElementById("basement").getContext("2d");
+	context = document.getElementById("canvas-basement").getContext("2d");
 	context.fillStyle = color;
 	return context;
 }
@@ -159,6 +159,26 @@ function fillB470(color) {
     context.lineTo(x + w, y + h);
     context.lineTo(x + w2, y + h2);
     context.lineTo(x + w3, y + h3);
+    context.closePath()
+	context.fill();
+}
+
+function fillB467(color) {
+	context = thisContext(color)
+	var x = 35;
+	var y = 203;
+	var w1 = 10;
+	var w2 = 53;
+	var h2 = 8;
+	var w3 = 50;
+	var h3 = 28;
+	var h4 = 25;
+	context.beginPath();
+    context.moveTo(x, y);
+    context.lineTo(x + w1, y);
+    context.lineTo(x + w2, y - h2);
+    context.lineTo(x + w3, y + h3);
+    context.lineTo(x, y + h4);
     context.closePath()
 	context.fill();
 }
