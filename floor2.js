@@ -1,5 +1,5 @@
 function thisContext(color) {
-	context = document.getElementById("canvas-floor1").getContext("2d");
+	context = document.getElementById("canvas-floor2").getContext("2d");
 	context.fillStyle = color;
 	return context;
 }
@@ -131,8 +131,8 @@ function fill2421(color) {
 	context = thisContext(color);
 	context.fillStyle = "#afa";
 	var x = 253;
-	var y = 230;
-	var h = 52;
+	var y = 225;
+	var h = 50;
 	var w = 74;
 	drawRect(context, x, y, w, h);
 	context.fill();
@@ -141,8 +141,8 @@ function fill2421(color) {
 function fill2425(color) {
 	context = thisContext(color);
 	var x = 253;
-	var y = 250;
-	var h = 52;
+	var y = 275;
+	var h = 46;
 	var w = 74;
 	drawRect(context, x, y, w, h);
 	context.fill();
@@ -150,10 +150,30 @@ function fill2425(color) {
 
 function fill2444(color) {
 	context = thisContext(color);
-	var x = 353;
-	var y = 72;
-	var h = 52;
-	var w = 74;
+	var x = 253;
+	var y = 368;
+	var h = 44;
+	var w = 38;
+	drawRect(context, x, y, w, h);
+	context.fill();
+}
+
+function fill2440(color) {
+	context = thisContext(color);
+	var x = 291;
+	var y = 350;
+	var h = 62;
+	var w = 102;
+	drawRect(context, x, y, w, h);
+	context.fill();
+}
+
+function fill2430(color) {
+	context = thisContext(color);
+	var x = 349;
+	var y = 318;
+	var h = 33;
+	var w = 44;
 	drawRect(context, x, y, w, h);
 	context.fill();
 }
