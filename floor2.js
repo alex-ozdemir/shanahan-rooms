@@ -1,19 +1,19 @@
-function thisContext(color) {
-	context = document.getElementById("canvas-floor2").getContext("2d");
+function getContext(canvasid, color) {
+	context = document.getElementById(canvasid).getContext("2d");
 	context.fillStyle = color;
 	return context;
-}
+} 
 
-function placeImage() {
+function placeImage(canvasid, filename) {
 	var img = new Image();
-	img.src = "shanahan-floor2.gif";
-	img.alt = "Second Floor";
+	img.src = filename;
+	img.alt = filename;
 	img.onload = function() {
 		if (img.complete) {
 			console.log("Native Image height:", img.naturalHeight);
 			console.log("Native Image width:", img.naturalWidth);
-			var canvas = document.getElementById("canvas-floor2");
-			context = thisContext();
+			var canvas = document.getElementById(canvasid)
+			var context = canvas.getContext("2d");          	
 			context.drawImage(img,
 							  0, 0, img.naturalWidth, img.naturalHeight,
 							  0, 0, canvas.width, canvas.height);
@@ -45,7 +45,7 @@ function drawPoly(context, points) {
 }
 
 function fill2475(color) {
-	context = thisContext(color);
+	context = getContext("canvas-floor2", color);
 	var x = 49;
 	var y = 100;
 	var height = 76;
@@ -56,7 +56,7 @@ function fill2475(color) {
 }
 
 function fill2471(color) {
-	context = thisContext(color);
+	context = getContext("canvas-floor2", color);
 	var x = 49;
 	var y = 177;
 	var height = 30;
@@ -67,10 +67,10 @@ function fill2471(color) {
 }
 
 function fill2465(color) {
-	context = thisContext(color);
+	context = getContext("canvas-floor2", color);
 	var x = 49;
 	var y = 206;
-	var height = 55;
+	var height = 57;
 	var topBase = 75;
 	var botBase = 64;
 	drawHorizontalBaseTrap(context, x, y, height, topBase, botBase);
@@ -78,11 +78,11 @@ function fill2465(color) {
 }
 
 function fill2461(color) {
-	context = thisContext(color);
+	context = getContext("canvas-floor2", color);
 	var x = 49;
-	var y = 261;
-	var lowHeight = 56;
-	var highHeigt = 50;
+	var y = 263;
+	var lowHeight = 54;
+	var highHeigt = 48;
 	var topBase = 65;
 	var botBase = 56;
 	drawPoly(context,
@@ -94,7 +94,7 @@ function fill2461(color) {
 }
 
 function fill2460(color) {
-	context = thisContext(color);
+	context = getContext("canvas-floor2", color);
 	var x = 5;
 	var y = 328;
 	var leftH = 95;
@@ -105,7 +105,7 @@ function fill2460(color) {
 }
 
 function fill2454(color) {
-	context = thisContext(color);
+	context = getContext("canvas-floor2", color);
 	var x = 87;
 	var y = 338;
 	var leftH = 85;
@@ -116,7 +116,7 @@ function fill2454(color) {
 }
 
 function fill2450(color) {
-	context = thisContext(color);
+	context = getContext("canvas-floor2", color);
 	var x = 173;
 	var y = 348;
 	var leftH = 73;
@@ -128,7 +128,7 @@ function fill2450(color) {
 
 
 function fill2481(color) {
-	context = thisContext(color);
+	context = getContext("canvas-floor2", color);
 	var x = 5;
 	var y = 100;
 	var h = 30;
@@ -138,7 +138,7 @@ function fill2481(color) {
 }
 
 function fill2407(color) {
-	context = thisContext(color);
+	context = getContext("canvas-floor2", color);
 	var x = 253;
 	var y = 72;
 	var h = 52;
@@ -148,7 +148,7 @@ function fill2407(color) {
 }
 
 function fill2421(color) {
-	context = thisContext(color);
+	context = getContext("canvas-floor2", color);
 	context.fillStyle = "#afa";
 	var x = 253;
 	var y = 225;
@@ -159,7 +159,7 @@ function fill2421(color) {
 }
 
 function fill2425(color) {
-	context = thisContext(color);
+	context = getContext("canvas-floor2", color);
 	var x = 253;
 	var y = 275;
 	var h = 46;
@@ -169,7 +169,7 @@ function fill2425(color) {
 }
 
 function fill2444(color) {
-	context = thisContext(color);
+	context = getContext("canvas-floor2", color);
 	var x = 253;
 	var y = 368;
 	var h = 44;
@@ -179,7 +179,7 @@ function fill2444(color) {
 }
 
 function fill2440(color) {
-	context = thisContext(color);
+	context = getContext("canvas-floor2", color);
 	var x = 291;
 	var y = 350;
 	var h = 62;
@@ -189,7 +189,7 @@ function fill2440(color) {
 }
 
 function fill2430(color) {
-	context = thisContext(color);
+	context = getContext("canvas-floor2", color);
 	var x = 349;
 	var y = 318;
 	var h = 33;
