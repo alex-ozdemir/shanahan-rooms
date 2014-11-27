@@ -4,6 +4,26 @@ function thisContext(color) {
 	return context;
 }
 
+function placeImage() {
+	var img = new Image();
+	img.src = "shanahan-floor2.gif";
+	img.alt = "Second Floor";
+	img.onload = function() {
+		if (img.complete) {
+			console.log("Native Image height:", img.naturalHeight);
+			console.log("Native Image width:", img.naturalWidth);
+			var canvas = document.getElementById("canvas-floor2");
+			context = thisContext();
+			context.drawImage(img,
+							  0, 0, img.naturalWidth, img.naturalHeight,
+							  0, 0, canvas.width, canvas.height);
+		}
+		else {
+			console.log("Image failed to load");
+		}
+	};
+}
+
 function drawHorizontalBaseTrap(context, x, y, h, w1, w2) {
 	drawPoly(context, [x, y, x + w1, y, x + w2, y + h, x, y + h]);
 }
