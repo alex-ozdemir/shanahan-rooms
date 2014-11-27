@@ -1,27 +1,7 @@
-function thisContext(color) {
-	context = document.getElementById("canvas-floor3").getContext("2d");
-	context.fillStyle = color;
-	return context;
-}
 
-function drawHorizontalBaseTrap(context, x, y, h, w1, w2) {
-	drawPoly(context, [x, y, x + w1, y, x + w2, y + h, x, y + h]);
-}
-
-function drawRect(context, x, y, w, h) {
-	drawPoly(context, [x, y, x + w, y, x + w, y + h, x, y + h]);
-}
-
-function drawPoly(context, points) {
-	context.beginPath();
-	context.moveTo(points[0], points[1]);
-	for (var i = 2; i < points.length; i += 2)
-		context.lineTo(points[i], points[i + 1]);
-	context.closePath();
-}
 
 function fill3481(color) {
-	context = thisContext(color)
+	context = getContext("canvas-floor3", color)
 	var x = 70;
 	var y = 138;
 	var w = 99;
@@ -31,7 +11,7 @@ function fill3481(color) {
 }
 
 function fill3485(color) {
-	context = thisContext(color)
+	context = getContext("canvas-floor3", color)
 	var x = 170;
 	var y = 138;
 	var w = 78;
@@ -41,7 +21,7 @@ function fill3485(color) {
 }
 
 function fill3466(color) {
-	context = thisContext(color)
+	context = getContext("canvas-floor3", color)
 	var x = 38;
 	var y = 227;
 	var w = 20;
@@ -51,7 +31,7 @@ function fill3466(color) {
 }
 
 function fill3421(color) {
-	context = thisContext(color)
+	context = getContext("canvas-floor3", color)
 	var x = 270;
 	var y = 200;
 	var w = 65;
@@ -61,7 +41,7 @@ function fill3421(color) {
 }
 
 function fill3425(color) {
-	context = thisContext(color)
+	context = getContext("canvas-floor3", color)
 	var x = 270;
 	var y = 271;
 	var w = 65;
@@ -71,7 +51,7 @@ function fill3425(color) {
 }
 
 function fill3465(color) {
-	context = thisContext(color)
+	context = getContext("canvas-floor3", color)
 	var x = 71;
 	var y = 188;
 	var height = 61;
@@ -82,7 +62,7 @@ function fill3465(color) {
 }
 
 function fill3461(color) {
-	context = thisContext(color)
+	context = getContext("canvas-floor3", color)
 	var x = 71;
 	var y = 250;
 	var lowHeight = 68;
@@ -98,7 +78,7 @@ function fill3461(color) {
 }
 
 function fill3461(color) {
-	context = thisContext(color)
+	context = getContext("canvas-floor3", color)
 	var x = 71;
 	var y = 250;
 	var lowHeight = 68;
@@ -115,7 +95,7 @@ function fill3461(color) {
 
 
 function fill3460(color) {
-	context = thisContext(color)
+	context = getContext("canvas-floor3", color)
 	var x = 56;
 	var y = 330;
 	var w1 = 76;
