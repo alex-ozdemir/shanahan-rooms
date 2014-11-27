@@ -1,5 +1,8 @@
 function getContext(canvasid, color) {
-	context = document.getElementById(canvasid).getContext("2d");
+	canvas = document.getElementById(canvasid)
+	console.log(canvas);
+	console.log(canvasid);
+	context = canvas.getContext("2d");
 	context.fillStyle = color;
 	return context;
 } 
