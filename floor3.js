@@ -4,100 +4,80 @@ function thisContext(color) {
 	return context;
 }
 
-function fill1480(color) {
-	context = thisContext(color)
-	var x = 50;
-	var y = 126;
-	var w = 63;
-	var w2 = 54;
-	var h2 = 69;
-	var w3 = -23;
-	var h3 = 57;
-	var h4 = 53;
-	context.beginPath();
-    context.moveTo(x, y);
-    context.lineTo(x + w, y);
-    context.lineTo(x + w2, y + h2);
-    context.lineTo(x + w3, y + h3);
-    context.lineTo(x + w3, y + h4);
-    context.closePath();
-	context.fill();
+function drawHorizontalBaseTrap(context, x, y, h, w1, w2) {
+	drawPoly(context, [x, y, x + w1, y, x + w2, y + h, x, y + h]);
 }
 
-function fill1470(color) {
-	context = thisContext(color)
-	var x = 26;
-	var y = 184;
-	var w1 = 78;
-	var h1 = 9;
-	var w2 = 70;
-	var h2 = 70;
-	var w3 = 0;
-	var h3 = 57;
-	context.beginPath();
-    context.moveTo(x, y);
-    context.lineTo(x + w1, y + h1);
-    context.lineTo(x + w2, y + h2);
-    context.lineTo(x + w3, y + h3);
-    context.closePath();
-	context.fill();
+function drawRect(context, x, y, w, h) {
+	drawPoly(context, [x, y, x + w, y, x + w, y + h, x, y + h]);
 }
 
-function fillLR(color) {
-	context = thisContext(color)
-	var x = 26;
-	var y = 240;
-	var w1 = 71; 
-	var h1 = 13;
-	var w2 = 64;
-	var h2 = 67;
-	var w3 = 0;
-	var h3 = 57; 
+function drawPoly(context, points) {
 	context.beginPath();
-	context.moveTo(x, y);
-	context.lineTo(x + w1, y + h1);
-	context.lineTo(x + w2, y + h2);
-	context.lineTo(x + w3, y + h3);
+	context.moveTo(points[0], points[1]);
+	for (var i = 2; i < points.length; i += 2)
+		context.lineTo(points[i], points[i + 1]);
 	context.closePath();
+}
+
+function fill3481(color) {
+	context = thisContext(color)
+	var x = 70;
+	var y = 138;
+	var w = 99;
+	var h = 50;
+	drawRect(context, x, y, w, h);
 	context.fill();
 }
 
-function fillCafe(color) {
+function fill3485(color) {
 	context = thisContext(color)
-	var x = 26;
-	var y = 295;
-	var w1 = 64; 
-	var h1 = 11;
-	var w2 = 55;
-	var h2 = 84;
-	var w3 = 1;
-	var h3 = 78; 
-	context.beginPath();
-	context.moveTo(x, y);
-	context.lineTo(x + w1, y + h1);
-	context.lineTo(x + w2, y + h2);
-	context.lineTo(x + w3, y + h3);
-	context.closePath();
+	var x = 170;
+	var y = 138;
+	var w = 78;
+	var h = 50;
+	drawRect(context, x, y, w, h);
 	context.fill();
 }
 
-
-
-function fill1430(color) {
+function fill3466(color) {
 	context = thisContext(color)
-	var x = 214;
-	var y = 233;
-	var w = 108;
-	var wc = 122;
-	var hc = 82;
-	var h = 175;
-	context.beginPath();
-    context.moveTo(x, y);
-    context.lineTo(x + w, y);
-    context.lineTo(x + wc, y + hc);
-    context.lineTo(x + w, y + h);
-    context.lineTo(x, y + h);
-    context.closePath();
+	var x = 38;
+	var y = 227;
+	var w = 20;
+	var h = 46;
+	drawRect(context, x, y, w, h);
+	context.fill();
+}
+
+function fill3421(color) {
+	context = thisContext(color)
+	var x = 270;
+	var y = 200;
+	var w = 65;
+	var h = 71;
+	drawRect(context, x, y, w, h);
+	context.fill();
+}
+
+function fill3425(color) {
+	context = thisContext(color)
+	var x = 270;
+	var y = 271;
+	var w = 65;
+	var h = 45;
+    drawRect(context, x, y, w, h);
+	context.fill();
+}
+
+function fill3465(color) {
+	context = thisContext(color)
+	var x = 270;
+	var y = 271;
+	var height = 65;
+	var topBase = 45;
+	var botBase = 50;
+    drawHorizontalBaseTrap(context, x, y, height, topBase, botBase);
 	context.fill();
 }
 
