@@ -1,12 +1,5 @@
-function thisContext(color) {
-	context = document.getElementById("canvas-basement").getContext("2d");
-	context.fillStyle = color;
-	return context;
-}
-
-
 function fillB449(color) {
-	context = thisContext(color)
+	context = getContext("canvas-basement", color)
 	context.beginPath();
 	var x = 113;
 	var y = 292;
@@ -17,7 +10,7 @@ function fillB449(color) {
 }
 
 function fillB446(color) {
-	context = thisContext(color)
+	context = getContext("canvas-basement", color)
 	context.beginPath();
 	var x = 163;
 	var y = 292;
@@ -28,7 +21,7 @@ function fillB446(color) {
 }
 
 function fillB445(color) {
-	context = thisContext(color)
+	context = getContext("canvas-basement", color)
 	context.beginPath();
 	var x = 213;
 	var y = 292;
@@ -39,23 +32,18 @@ function fillB445(color) {
 }
 
 function fill1430(color) {
-	context = thisContext(color)
+	context = getContext("canvas-basement", color)
 	var x = 213;
-	var y = 213;
-	var w = 111;
+	var y = 214;
+	var w = 112;
 	var w2 = 121;
 	var h = 79;
-	context.beginPath();
-    context.moveTo(x, y);
-    context.lineTo(x + w, y);
-    context.lineTo(x + w2, y + h);
-    context.lineTo(x, y + h);
-    context.closePath()
+	drawHorizontalBaseTrap(context, x, y, h, w, w2);
 	context.fill();
 }
 
 function fillB454(color) {
-	context = thisContext(color)
+	context = getContext("canvas-basement", color)
 	context.beginPath();
 	var x = 89;
 	var y = 354;
@@ -66,7 +54,7 @@ function fillB454(color) {
 }
 
 function fillAG(color) {
-	context = thisContext(color)
+	context = getContext("canvas-basement", color)
 	context.beginPath();
 	var x = 92;
 	var y = 125;
@@ -77,7 +65,7 @@ function fillAG(color) {
 }
 
 function fillB450(color) {
-	context = thisContext(color)
+	context = getContext("canvas-basement", color)
 	context.beginPath();
 	var x = 134;
 	var y = 354;
@@ -88,7 +76,7 @@ function fillB450(color) {
 }
 
 function fillB442(color) {
-	context = thisContext(color)
+	context = getContext("canvas-basement", color)
 	context.beginPath();
 	var x = 213;
 	var y = 354;
@@ -99,13 +87,13 @@ function fillB442(color) {
 }
 
 function fillB460(color) {
-	context = thisContext(color)
+	context = getContext("canvas-basement", color)
 	var x = 5;
 	var y = 308;
 	var ph = 14;
 	var pw = 13;
 	var ph2 = 3;
-	var w = 84;
+	var w = 85;
 	var h = 102;
 	context.beginPath();
     context.moveTo(x, y);
@@ -119,7 +107,7 @@ function fillB460(color) {
 }
 
 function fillB480(color) {
-	context = thisContext(color)
+	context = getContext("canvas-basement", color)
 	var x = 5;
 	var y = 132;
 	var ph = 8;
@@ -145,7 +133,7 @@ function fillB480(color) {
 }
 
 function fillB470(color) {
-	context = thisContext(color)
+	context = getContext("canvas-basement", color)
 	var x = 35;
 	var y = 227;
 	var w = 51;
@@ -164,13 +152,13 @@ function fillB470(color) {
 }
 
 function fillB467(color) {
-	context = thisContext(color)
+	context = getContext("canvas-basement", color)
 	var x = 35;
 	var y = 203;
 	var w1 = 10;
-	var w2 = 53;
-	var h2 = 8;
-	var w3 = 50;
+	var w2 = 54;
+	var h2 = 6;
+	var w3 = 51;
 	var h3 = 28;
 	var h4 = 25;
 	context.beginPath();
