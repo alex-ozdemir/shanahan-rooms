@@ -10,9 +10,11 @@ function getAllBlocks(callback) {
 
         var collection = db.collection('time_blocks');
         collection.find().toArray(function (err, results) {
+            if (err)
+                console.log(err);
             callback(results);
-        })
-    })
+        });
+    });
 }
 
 // Get all the blocks from the DB related to this room
@@ -22,8 +24,8 @@ function getBlocksByRoom(room, callback) {
         var collection = db.collection('time_blocks');
         collection.find({room: room}).toArray(function (err, results) {
             callback(results);
-        })
-    })
+        });
+    });
 }
 
 // Reset the DB's blocks and then inserts the new ones
@@ -59,16 +61,20 @@ server.get(/^\/room\/(\w+)$/, function (req, res) {
 
 server.get('/rooms/', function (req, res) {
     getAllBlocks(function (blocks) {
-        var rooms = getRooms(blocks);
-        var msg = '<ul>';
-        for (var i = 0; i < rooms.length; i++)
-            if (Block.isOpen(rooms[i], blocks))
-                msg += "<li>" + rooms[i] + "</li>";
-        msg += '<ul>';
-        res.send("Open rooms: <br />" + msg);
+        console.log(Block);
+        var states = Block.getRoomStates(blocks);
+        for (room in states) {
+            if (states[room] == Block.OPEN_ROOM)
+                states[room] = "#afa";
+            else if (states[room] == Block.CLOSED_ROOM)
+                states[room] = "#faa";
+            else
+                console.log("Room state not recognized:", states[room], Block.OPEN_ROOM);
+        }
+        console.log(states);
+        res.render('shanahan-joined.ejs', {rooms: states});
     });
 });
-
 
 server.get('/reset/', function(req, res) {
     var s = fs.readFileSync("./schedule.txt", {encoding: 'utf-8'});
@@ -92,5 +98,7 @@ server.get('/reset/', function(req, res) {
         }
     });
 });
+
+server.use(express.static(__dirname + '/static'));
 
 server.listen(80);

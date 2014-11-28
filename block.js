@@ -1,10 +1,24 @@
 //block.js
 
 module.exports = {
+    OPEN_ROOM: 'open',
+    CLOSED_ROOM: 'closed',
+    CLOSED_SOON_ROOM: 'yellow',
+    getRoomStates: getRoomStates,
 	blockToString: blockToString,
 	parseReset: parseReset,
 	isOpen: isOpen
 }
+
+var OPEN_ROOM = 'open';
+var CLOSED_ROOM = 'closed';
+var CLOSED_SOON_ROOM = 'yellow';
+
+var ROOMS = ['B449','B446','B445','1430b','AG','B454','B450','B442','B460',
+             'B480','B470','B467','1480','1430','1470','LR','Cafe','2475',
+             '2471','2465','2461','2460','2454','2450','2481','2407','2421',
+             '2425','2444','2440','2430','3481','3485','3466','3421','3425',
+             '3465','3461','3460'];
 
 // Date which all other dates are sent to the same week as.
 var REF_DATE = "January 5, 2014";
@@ -17,6 +31,17 @@ var DAYSOFWEEKFULL = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 // Useful
 var log = console.log;
+
+function getRoomStates(blocks) {
+    var states = {};
+    for (var i = 0; i < ROOMS.length; i++)
+        if (isOpen(ROOMS[i], blocks))
+            states[ROOMS[i]] = OPEN_ROOM;
+        else
+            states[ROOMS[i]] = CLOSED_ROOM;
+    return states;
+}
+
 
 /* Changes a date to be in the week after the refence week
  * -input: a date to change
@@ -140,6 +165,8 @@ function parseReset(instructions, callback) {
     var DAYS = 'DAYS';
     var keyWords = [ROOM, START, END, DAYS, COMMENT];
 
+
+    instructions = instructions.replace(/\\\s*\n/gm, ' ');
     instructions = instructions.replace(/^\s+/gm, '');
     instructions = instructions.replace(/[\r\n]+/gm, '\n');
     instructions = instructions.replace(/\n\s+/gm, '\n');

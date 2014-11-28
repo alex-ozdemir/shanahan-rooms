@@ -6,7 +6,8 @@
 #
 # All of the rooms will get a block with the close and open 
 #  times beginning on each of the days
+#
+# \ Can be used to extend a line
 
-
-room 1234 days MT close 16:00 open 06:00
-room 1235,1236 days M close 16:00 open 06:00
+room B449,B446,B445,1430b,AG,B454,B450,B442,B460,B480,B470,B467,1480,1430,1470,LR,Cafe,2475,2471,2465,2461,2460,2454,2450,2481,2407,2421,2425,2444,2440,2430,3481,3485,3466,3421,3425,3465,3461,3460 \
+days SMTWRFA close 17:00 open 06:00
