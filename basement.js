@@ -2,9 +2,9 @@ function fillB449(color) {
 	context = getContext("canvas-basement", color)
 	context.beginPath();
 	var x = 113;
-	var y = 292;
+	var y = 279;
 	var w = 50;
-	var h = 45;
+	var h = 50;
     drawRect(context, x, y, w, h);
 	context.fill();
 }
@@ -13,9 +13,9 @@ function fillB446(color) {
 	context = getContext("canvas-basement", color)
 	context.beginPath();
 	var x = 163;
-	var y = 292;
+	var y = 279;
 	var w = 50;
-	var h = 45;
+	var h = 50;
     drawRect(context, x, y, w, h);
 	context.fill();
 }
@@ -24,9 +24,9 @@ function fillB445(color) {
 	context = getContext("canvas-basement", color)
 	context.beginPath();
 	var x = 213;
-	var y = 292;
+	var y = 279;
 	var w = 60;
-	var h = 45;
+	var h = 50;
     drawRect(context, x, y, w, h);
 	context.fill();
 }
@@ -34,10 +34,10 @@ function fillB445(color) {
 function fill1430b(color) {
 	context = getContext("canvas-basement", color)
 	var x = 213;
-	var y = 214;
+	var y = 193;
 	var w = 112;
 	var w2 = 121;
-	var h = 79;
+	var h = 86;
 	drawHorizontalBaseTrap(context, x, y, h, w, w2);
 	context.fill();
 }
@@ -46,9 +46,9 @@ function fillB454(color) {
 	context = getContext("canvas-basement", color)
 	context.beginPath();
 	var x = 89;
-	var y = 354;
+	var y = 349;
 	var w = 45;
-	var h = 56;
+	var h = 62;
     drawRect(context, x, y, w, h);
 	context.fill();
 }
@@ -68,9 +68,9 @@ function fillB450(color) {
 	context = getContext("canvas-basement", color)
 	context.beginPath();
 	var x = 134;
-	var y = 354;
+	var y = 349;
 	var w = 79;
-	var h = 56;
+	var h = 62;
     drawRect(context, x, y, w, h);
 	context.fill();
 }
@@ -79,9 +79,9 @@ function fillB442(color) {
 	context = getContext("canvas-basement", color)
 	context.beginPath();
 	var x = 213;
-	var y = 354;
+	var y = 349;
 	var w = 77;
-	var h = 56;
+	var h = 62;
     drawRect(context, x, y, w, h);
 	context.fill();
 }
@@ -89,12 +89,12 @@ function fillB442(color) {
 function fillB460(color) {
 	context = getContext("canvas-basement", color)
 	var x = 5;
-	var y = 308;
+	var y = 298;
 	var ph = 14;
 	var pw = 13;
 	var ph2 = 3;
 	var w = 85;
-	var h = 102;
+	var h = 112;
 	context.beginPath();
     context.moveTo(x, y);
     context.lineTo(x + pw, y);
