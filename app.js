@@ -36,7 +36,6 @@ function resetBlocks(blocks, callback) {
                 callback("Time Blocks could not be cleared","");
             else
                 collection.insert(blocks , function(err, rec) {
-                    err = "" + err;
                     out = ""
                     for (var i in rec) {
                         out += Block.blockToString(rec[i]) + "\n";
@@ -74,14 +73,21 @@ server.get('/rooms/', function (req, res) {
 server.get('/reset/', function(req, res) {
     var s = fs.readFileSync("./schedule.txt", {encoding: 'utf-8'});
     Block.parseReset(s, function(err, blocks) {
-        if (err)
+        if (err) {
+            console.log("ERROR parsing schedule!!");
+            console.log(err);
             res.send(err);
+        }
         else {
             resetBlocks(blocks, function(err, out) {
-                if (err)
+                if (err != null) {
                     res.send(err.replace(/\n/gm, '<br />'));
-                else
+                    console.log("ERROR resetting database!!");
+                }
+                else {
                     res.send(out.replace(/\n/gm, '<br />'));
+                    console.log(out);
+                }
             });
         }
     });

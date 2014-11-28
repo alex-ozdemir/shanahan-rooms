@@ -15,6 +15,8 @@ var DAYSOFWEEK = "SMTWRFA";
 // Abbreviations for each day of the week
 var DAYSOFWEEKFULL = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+// Useful
+var log = console.log;
 
 /* Changes a date to be in the week after the refence week
  * -input: a date to change
@@ -97,27 +99,29 @@ function parsedLinesToBlocks(parsedLines) {
 // Converts a parsed line to blocks
 function parsedLineToBlocks(parsedLine) {
     var blocks = [];
-    while (parsedLine.days.length > 0) { 
-        day = parsedLine.days[0];
-        parsedLine.days =  parsedLine.days.slice(1);
+    var room, day;
+    for (var r = 0; r < parsedLine.rooms.length; ++r) {
+        room = parsedLine.rooms[r];
+        for (var i = 0; i < parsedLine.days.length; ++i) { 
+            day = parsedLine.days[i];
 
+            start = new Date(REF_DATE);
+            end = new Date(REF_DATE);
 
-        start = new Date(REF_DATE);
-        end = new Date(REF_DATE);
+            start.setDate(start.getDate() + DAYSOFWEEK.indexOf(day));
+            end.setDate(end.getDate() + DAYSOFWEEK.indexOf(day));
 
-        start.setDate(start.getDate() + DAYSOFWEEK.indexOf(day));
-        end.setDate(end.getDate() + DAYSOFWEEK.indexOf(day));
+            start.setHours(parsedLine.start.hour);
+            start.setMinutes(parsedLine.start.min);
+            end.setHours(parsedLine.end.hour);
+            end.setMinutes(parsedLine.end.min);
 
-        start.setHours(parsedLine.start.hour);
-        start.setMinutes(parsedLine.start.min);
-        end.setHours(parsedLine.end.hour);
-        end.setMinutes(parsedLine.end.min);
-
-        if (start > end) {
-            end.setDate(end.getDate() + 1);
+            if (start > end) {
+                end.setDate(end.getDate() + 1);
+            }
+            end = normDate(end);
+            blocks.push({room: room, start: start, end: end});
         }
-        end = normDate(end);
-        blocks.push({room: parsedLine.room, start: start, end: end});
     }
     return blocks;
 }
@@ -166,11 +170,10 @@ function parseReset(instructions, callback) {
             error("Incorrect number of arguments");
         
         // Parse the line
-        var re = /^ROOM\s(\w+)\sDAYS\s([SMTWRFA]{1,7})\sCLOSE\s(\d{1,2}):(\d{2})\sOPEN\s(\d{1,2}):(\d{2})\s*$/
+        var re = /^ROOM\s((?:\w+,)*\w+)\sDAYS\s([SMTWRFA]{1,7})\sCLOSE\s(\d{1,2}):(\d{2})\sOPEN\s(\d{1,2}):(\d{2})\s*$/
         var results = re.exec(Uline)
         if (results != null) {
-            console.log("Line " + i + " parsed");
-            room = results[1]; 
+            rooms = results[1].split(",");
             days = results[2];
             start_hr = parseInt(results[3]);
             start_min = parseInt(results[4]);
@@ -183,13 +186,10 @@ function parseReset(instructions, callback) {
         }
 
         if (errLines.indexOf(i) < 0) {
-            parsed.push({room: room, days: days,
+            parsed.push({rooms: rooms, days: days,
                     start: {hour: start_hr, min: start_min},
                     end: {hour: end_hr, min: end_min}});
         }
     }
-    console.log("Parsing done.");
-    console.log("   Error: ", err);
-    console.log("  Parsed: ", parsed);
     callback(err, parsedLinesToBlocks(parsed));
 }

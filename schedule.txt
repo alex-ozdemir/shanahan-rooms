@@ -1,5 +1,12 @@
-# Block : Room Days Times
-# Room :
+# SYNTAX:
+#
+# room W[,W ...] days [SMTWRFA] close HH:MM open HH:MM
+#
+# where W is an alphanumeric
+#
+# All of the rooms will get a block with the close and open 
+#  times beginning on each of the days
 
-room 1234 days MTWR close 16:00 open 06:00
-room 1235 days MTW close 16:00 open 06:00
+
+room 1234 days MT close 16:00 open 06:00
+room 1235,1236 days M close 16:00 open 06:00
