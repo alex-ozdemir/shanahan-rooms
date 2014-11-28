@@ -1,0 +1,5 @@
+# Block : Room Days Times
+# Room :
+
+room 1234 days MTWR close 16:00 open 06:00
+room 1235 days MTW close 16:00 open 06:00
