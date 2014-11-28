@@ -1,16 +1,16 @@
 <html>
 	<head>
+		<script type="text/javascript" src="util.js"></script>
 		<script type="text/javascript" src="basement.js"></script>
 	</head>
 	<body>
-		<img id="img-floor1" src="shanahan-basement.gif" width="400" height="420" style="position:absolute;left:0;top:0;z-index:-1" />
-		<canvas id="canvas-basement" width="400" height="420" style="border:1px solid black;position:absolute;left:0;top:0;z-index:-2"></canvas>
+		<canvas id="canvas-basement" width="400" height="420" style="border:1px solid black"></canvas>
 		<script type="text/javascript">
 		window.onload = function() {
 			fillB449("#faa");
 			fillB446("#afa");
 			fillB445("#aaf");
-			fill1430("#faa");
+			fill1430b("#faa");
 			fillAG("#faa");
 			fillB454("#aaf");
 			fillB450("#afa");
@@ -19,6 +19,7 @@
 			fillB480("#afa");
 			fillB470("#aaf");
 			fillB467("#faa");
+			placeImage("canvas-basement", "shanahan-basement-resize.gif");
 		}
 		</script>
 	</body>
