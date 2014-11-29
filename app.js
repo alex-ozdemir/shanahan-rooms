@@ -61,7 +61,6 @@ server.get(/^\/room\/(\w+)$/, function (req, res) {
 
 server.get('/rooms/', function (req, res) {
     getAllBlocks(function (blocks) {
-        console.log(Block);
         var states = Block.getRoomStates(blocks);
         for (room in states) {
             if (states[room] == Block.OPEN_ROOM)
@@ -69,9 +68,8 @@ server.get('/rooms/', function (req, res) {
             else if (states[room] == Block.CLOSED_ROOM)
                 states[room] = "#faa";
             else
-                console.log("Room state not recognized:", states[room], Block.OPEN_ROOM);
+                console.log("Room state not recognized:", states[room]);
         }
-        console.log(states);
         res.render('shanahan-joined.ejs', {rooms: states});
     });
 });
