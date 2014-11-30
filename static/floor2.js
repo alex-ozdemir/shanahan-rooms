@@ -103,7 +103,6 @@ function fill2407(color) {
 
 function fill2421(color) {
 	context = getContext("canvas-floor2", color);
-	context.fillStyle = "#afa";
 	var x = 253;
 	var y = 225;
 	var h = 50;

@@ -90,10 +90,11 @@ function isBlocked(room, block) {
         start = new Date(block.start);
         end = new Date(block.end);
         if (start < end && now > start && now < end)
-            return false;
+            return true;
         else if (start > end && now > start)
-            return false;
+            return true;
 	}
+    return false;
 }
 
 // Sees if a room is open according to the given blocks (String Dates)
@@ -177,7 +178,6 @@ function parseReset(instructions, callback) {
 
     for (var i = 0 ; i < lines.length; i++) {
         line = lines[i]
-        Uline = line.toUpperCase();
 
         var room, start, end, days;
                   
@@ -197,8 +197,8 @@ function parseReset(instructions, callback) {
             error("Incorrect number of arguments");
         
         // Parse the line
-        var re = /^ROOM\s((?:\w+,)*\w+)\sDAYS\s([SMTWRFA]{1,7})\sCLOSE\s(\d{1,2}):(\d{2})\sOPEN\s(\d{1,2}):(\d{2})\s*$/
-        var results = re.exec(Uline)
+        var re = /^ROOM\s((?:\w+,)*\w+)\sDAYS\s([SMTWRFA]{1,7})\sCLOSE\s(\d{1,2}):(\d{2})\sOPEN\s(\d{1,2}):(\d{2})\s*$/i
+        var results = re.exec(line)
         if (results != null) {
             rooms = results[1].split(",");
             days = results[2];

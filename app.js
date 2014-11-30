@@ -62,6 +62,7 @@ server.get(/^\/room\/(\w+)$/, function (req, res) {
 server.get('/rooms/', function (req, res) {
     getAllBlocks(function (blocks) {
         var states = Block.getRoomStates(blocks);
+        console.log(states);
         for (room in states) {
             if (states[room] == Block.OPEN_ROOM)
                 states[room] = "#afa";
