@@ -3,7 +3,9 @@
 fs = require('fs');
 
 module.exports = {
-
+	getAllBlocks: getAllBlocks,
+	getBlocksByRoom: getBlocksByRoom,
+	insertRecords: insertRecords
 }
 
 var log = console.log;
@@ -14,15 +16,19 @@ function makeDeepDir(path) {
 	if (fs.exists(path))
 		return true;
 	dirs = path.split('/').reverse();
+	log("Directories: ", dirs);
 	current = './';
 	while (dirs.length > 0) {	
 		dir = dirs.pop();
-		if (dir == '' || dir == './')
+		if (dir == '' || dir == '.')
 			continue;
 		current += '/' + dir;
+		log("Making dir: ", current, "...");
 		try {
 			fs.mkdirSync(current);
+			log("  win");
 		} catch (err) {
+			log("  lose");
 			// The directory exists, continue
 		}
 
@@ -30,14 +36,16 @@ function makeDeepDir(path) {
 }
 
 function forceWrite(path, msg) {
-	dirpah = "./"
-	for (var i = path.length - 1; i >= 0; i++) {
+	log("Path to write: ", path);
+	dirpath = "./"
+	for (var i = path.length - 1; i >= 0; i--) {
 		if (path[i] == '/') {
 			dirpath = path.slice(0, i);
+			break;
 		}
 	}
 	makeDeepDir(dirpath);
-	writeFileSync(path, msg);
+	fs.writeFileSync(path, msg);
 }
 
 function checkStorageExists() {
@@ -52,13 +60,17 @@ function getAllBlocks() {
 	checkStorageExists();
 
 	room_files = fs.readdirSync(DATAPATH);
-	room_files.map(function (filename) {
-		if filename.slice(filename.indexOf('.'))
+	log("Getting all blocks: ", room_files);
+	blocks_by_room = room_files.map(function (filename) {
+		if (filename.slice(filename.indexOf('.')) == EXT) {
+			log(JSON.parse(fs.readFileSync(DATAPATH + filename)));
 			return JSON.parse(fs.readFileSync(DATAPATH + filename));
+		}
 		else
 			return [];
 	});
-	return room_files.reduce(function (a,b) {a.concat(b)});
+	log("Getting all blocks: ", blocks_by_room);
+	return blocks_by_room.reduce(function (a,b) {return a.concat(b)}, []);
 }
 
 function getBlocksByRoom(room) {
@@ -69,18 +81,28 @@ function getBlocksByRoom(room) {
 		return JSON.parse(fs.readFileSync(DATAPATH + room + EXT));
 }
 
-function insertRecords(pathToDir, records) {
+function clearRecords() {
+	if (fs.existsSync(DATAPATH)) {
+		log("Clearing out old records...")
+		fs.readdirSync(DATAPATH).map(function (filename) { fs.unlinkSync(DATAPATH + filename); });
+	}
+}
+
+function insertRecords(records) {
+	clearRecords();
 	recordsByRoom = {}
 	for (var i = 0; i < records.length; i++) {
 		if (!recordsByRoom[records[i].room])
 			recordsByRoom[records[i].room] = [records[i]];
 		else
-			recordsByRoom[records[i]].push(records[i]);
+			recordsByRoom[records[i].room].push(records[i]);
 	}
 	log("Records, by room: ", recordsByRoom);
 	for (room in recordsByRoom) {
+		log("Inserting records for", room, '...');
 		forceWrite(DATAPATH + room + EXT, JSON.stringify(recordsByRoom[room]));
 	}
+	log("Insertion Complete!");
 }
 
 

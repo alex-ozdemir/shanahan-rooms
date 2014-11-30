@@ -119,7 +119,7 @@ function getRooms(blocks) {
 function parsedLinesToBlocks(parsedLines) {
     return parsedLines.map(parsedLineToBlocks).reduce(function(a, b) {
         return a.concat(b);
-    });
+    }, []);
 }
 
 // Converts a parsed line to blocks
@@ -166,7 +166,7 @@ function parseReset(instructions, callback) {
     var DAYS = 'DAYS';
     var keyWords = [ROOM, START, END, DAYS, COMMENT];
 
-
+    instructions = instructions.replace(/#.*/gm, '');
     instructions = instructions.replace(/\\\s*\n/gm, ' ');
     instructions = instructions.replace(/^\s+/gm, '');
     instructions = instructions.replace(/[\r\n]+/gm, '\n');
@@ -177,8 +177,7 @@ function parseReset(instructions, callback) {
     var lines = instructions.split("\n");
 
     for (var i = 0 ; i < lines.length; i++) {
-        line = lines[i]
-
+        line = lines[i];
         var room, start, end, days;
                   
         function error(msg) {
