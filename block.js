@@ -13,6 +13,7 @@ module.exports = {
 var OPEN_ROOM = 'open';
 var CLOSED_ROOM = 'closed';
 var CLOSED_SOON_ROOM = 'yellow';
+var ALMOST_CLOSED_THRESHOLD = 20; // In minutes
 
 var ROOMS = ['B449','B446','B445','1430b','AG','B454','B450','B442','B460',
              'B480','B470','B467','1480','1430','1470','LR','Cafe','2475',
@@ -36,7 +37,10 @@ function getRoomStates(blocks) {
     var states = {};
     for (var i = 0; i < ROOMS.length; i++)
         if (isOpen(ROOMS[i], blocks))
-            states[ROOMS[i]] = OPEN_ROOM;
+            if (almostClosed(ROOMS[i], blocks))
+                states[ROOMS[i]] = CLOSED_SOON_ROOM;
+            else
+                states[ROOMS[i]] = OPEN_ROOM;
         else
             states[ROOMS[i]] = CLOSED_ROOM;
     return states;
@@ -85,13 +89,13 @@ function fixedWidthStr(inp, size, fill) {
 }
 
 // Sees if the room is blocked by this block (String Dates).
-function isBlocked(room, block) {
+function isBlocked(room, block, time) {
 	if (block.room == room) {
         start = new Date(block.start);
         end = new Date(block.end);
-        if (start < end && now > start && now < end)
+        if (start < end && time > start && time < end)
             return true;
-        else if (start > end && now > start)
+        else if (start > end && time > start)
             return true;
 	}
     return false;
@@ -101,18 +105,28 @@ function isBlocked(room, block) {
 function isOpen(room, blocks) {
     now = normDate(new Date());
     for (var i = 0; i < blocks.length; i++)
-        if (isBlocked(room, blocks[i]))
+        if (isBlocked(room, blocks[i], now))
         	return false;
     return true;
 }
 
-// Gets a list of rooms in the blocks
-function getRooms(blocks) {
-    var rooms = [];
-    for (var i = 0; i < blocks.length; i++)
-        if (rooms.indexOf(blocks[i].room) == -1) 
-            rooms.push(blocks[i].room);
-    return rooms
+// Sees if a room is almost closed
+function almostClosed(room, blocks) {
+    var minTime = 7 * 24 * 60;
+    var now = normDate(new Date());
+    for (var i = 0; i < blocks.length; i++) {
+        var time = timeTillBlocked(room, blocks[i], now)
+        if (time >= 0 && time < minTime)
+            minTime = time;
+    }
+    return minTime <= ALMOST_CLOSED_THRESHOLD;
+}
+
+// Time till blocked, in minutes
+function timeTillBlocked(room, block, now) {
+    if (room != block.room)
+        return -1;
+    return (new Date(block.start) - now) / 1000 / 60;
 }
 
 // Converts parsedLine objects to block objects
@@ -152,6 +166,29 @@ function parsedLineToBlocks(parsedLine) {
     return blocks;
 }
 
+function toSet(list) {
+    if (list.length < 2)
+        return list;
+    first = list[0];
+    rest = list.slice(1);
+    if (rest.indexOf(first) < 0)
+        return toSet(rest.push(first))
+    else
+        return toSet(rest);
+}
+
+function get247Rooms(instructions) {
+    instructions = instructions.replace(/[ \t]*/gm, ' ');
+    instructions = instructions.replace(/\\\s*\n/gm, ' ');
+    instructions = instructions.replace(/\s*,\s*/gm, ',');
+    var lines = instructions.split('\n');
+    rooms = [];
+    for (var i = 0; i < lines.length; i++)
+        if (line[i][0] == '!')
+            rooms.concat(lines[i].split(' ')[1].split(','));
+    return toSet(rooms);
+}
+
 // Parses a string of instructions into parsedLin
 function parseReset(instructions, callback) {
     var err = "";
@@ -166,13 +203,16 @@ function parseReset(instructions, callback) {
     var DAYS = 'DAYS';
     var keyWords = [ROOM, START, END, DAYS, COMMENT];
 
-    instructions = instructions.replace(/#.*/gm, '');
+    // Remove any line beginning with # or !
+    instructions = instructions.replace(/[#!].*/gm, '');
+
     instructions = instructions.replace(/\\\s*\n/gm, ' ');
     instructions = instructions.replace(/^\s+/gm, '');
     instructions = instructions.replace(/[\r\n]+/gm, '\n');
     instructions = instructions.replace(/\n\s+/gm, '\n');
     instructions = instructions.replace(/[ \t]+/gm, ' ');
     instructions = instructions.replace(/\s+$/gm, '');
+    instructions = instructions.replace(/\s*,\s*/gm, ',');
 
     var lines = instructions.split("\n");
 
@@ -188,7 +228,7 @@ function parseReset(instructions, callback) {
         };
 
         // Check for comments
-        if (line.length == 0 || line[0] == COMMENT)
+        if (line.length == 0)
             continue;
 
         // Check number of tokens
