@@ -16,19 +16,15 @@ function makeDeepDir(path) {
 	if (fs.exists(path))
 		return true;
 	dirs = path.split('/').reverse();
-	log("Directories: ", dirs);
-	current = './';
+	current = '.';
 	while (dirs.length > 0) {	
 		dir = dirs.pop();
 		if (dir == '' || dir == '.')
 			continue;
 		current += '/' + dir;
-		log("Making dir: ", current, "...");
 		try {
 			fs.mkdirSync(current);
-			log("  win");
 		} catch (err) {
-			log("  lose");
 			// The directory exists, continue
 		}
 
@@ -36,7 +32,6 @@ function makeDeepDir(path) {
 }
 
 function forceWrite(path, msg) {
-	log("Path to write: ", path);
 	dirpath = "./"
 	for (var i = path.length - 1; i >= 0; i--) {
 		if (path[i] == '/') {
@@ -60,16 +55,13 @@ function getAllBlocks() {
 	checkStorageExists();
 
 	room_files = fs.readdirSync(DATAPATH);
-	log("Getting all blocks: ", room_files);
 	blocks_by_room = room_files.map(function (filename) {
 		if (filename.slice(filename.indexOf('.')) == EXT) {
-			log(JSON.parse(fs.readFileSync(DATAPATH + filename)));
 			return JSON.parse(fs.readFileSync(DATAPATH + filename));
 		}
 		else
 			return [];
 	});
-	log("Getting all blocks: ", blocks_by_room);
 	return blocks_by_room.reduce(function (a,b) {return a.concat(b)}, []);
 }
 
@@ -97,9 +89,7 @@ function insertRecords(records) {
 		else
 			recordsByRoom[records[i].room].push(records[i]);
 	}
-	log("Records, by room: ", recordsByRoom);
 	for (room in recordsByRoom) {
-		log("Inserting records for", room, '...');
 		forceWrite(DATAPATH + room + EXT, JSON.stringify(recordsByRoom[room]));
 	}
 	log("Insertion Complete!");

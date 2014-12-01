@@ -1,6 +1,5 @@
 var express = require('express');
 var server = express();
-var MongoClient = require('mongodb').MongoClient;
 var fs = require('fs');
 var Block = require('./block.js');
 var BlockStor = require('./files.js');
@@ -38,7 +37,6 @@ server.get('/reset/', function(req, res) {
             res.send(err);
         }
         else {
-            console.log("Inserting: ", blocks);
             BlockStor.insertRecords(blocks);
             out = "";
             for (block in blocks) {
