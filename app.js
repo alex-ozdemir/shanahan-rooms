@@ -65,4 +65,4 @@ server.get('/reset/', function(req, res) {
 
 server.use(express.static(__dirname + '/static'));
 
-server.listen(80);
+server.listen(8078);
