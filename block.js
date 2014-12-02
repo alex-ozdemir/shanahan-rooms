@@ -13,7 +13,7 @@ module.exports = {
 var OPEN_ROOM = 'open';
 var CLOSED_ROOM = 'closed';
 var CLOSED_SOON_ROOM = 'yellow';
-var ALMOST_CLOSED_THRESHOLD = 20; // In minutes
+var ALMOST_CLOSED_THRESHOLD = 30; // In minutes
 
 var ROOMS = ['B449','B446','B445','1430b','AG','B454','B450','B442','B460',
              'B480','B470','B467','1480','1430','1470','LR','Cafe','2475',
